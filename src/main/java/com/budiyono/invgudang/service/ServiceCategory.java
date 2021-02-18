@@ -14,11 +14,11 @@ public interface ServiceCategory {
     UpdateByIDf()
     Insert*/
 
-    List<ItemCategory> findAllItemCategory();
+    List<ItemCategory> findAllItemCategory(String initRow);
     ItemCategory findById(String id);
     ItemCategory findByName(String name);
-    void saveItemCategory(ItemCategory itemCategory);
-    void saveMulItemCategory(List<ItemCategory> itemCategories);
-    void deleteItem(String id);
+    void saveItemCategories(List<ItemCategory> itemCategory);
+    void deleteItemById(String id);
+    void deleteItemByName(String name);
     void updateItemCategory(ItemCategory itemCategory);
 }

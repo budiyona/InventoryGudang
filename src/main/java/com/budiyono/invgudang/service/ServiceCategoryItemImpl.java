@@ -1,45 +1,49 @@
 package com.budiyono.invgudang.service;
 
 import com.budiyono.invgudang.model.ItemCategory;
+import com.budiyono.invgudang.repository.RepositoryItemCategory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("ServiceCategory")
-public class ServiceCategoryItemImpl implements ServiceCategory{
+public class ServiceCategoryItemImpl implements ServiceCategory {
+    @Autowired
+    RepositoryItemCategory repositoryItemCategory;
 
     @Override
-    public List<ItemCategory> findAllItemCategory() {
-        return null;
+    public List<ItemCategory> findAllItemCategory(String initRow) {
+        return repositoryItemCategory.findAllItemCategory(initRow);
     }
 
     @Override
     public ItemCategory findById(String id) {
-        return null;
+        return repositoryItemCategory.findById(id);
     }
 
     @Override
     public ItemCategory findByName(String name) {
-        return null;
+        return repositoryItemCategory.findByName(name);
     }
 
     @Override
-    public void saveItemCategory(ItemCategory itemCategory) {
-
+    public void saveItemCategories(List<ItemCategory> itemCategory) {
+        repositoryItemCategory.saveItemCategories(itemCategory);
     }
 
     @Override
-    public void saveMulItemCategory(List<ItemCategory> itemCategories) {
-
+    public void deleteItemById(String id) {
+        repositoryItemCategory.deleteItemById(id);
     }
 
     @Override
-    public void deleteItem(String id) {
-
+    public void deleteItemByName(String name) {
+        repositoryItemCategory.deleteItemByName(name);
     }
 
     @Override
     public void updateItemCategory(ItemCategory itemCategory) {
-
+        repositoryItemCategory.updateItemCategory(itemCategory);
     }
 }
