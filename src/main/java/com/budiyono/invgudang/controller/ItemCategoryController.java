@@ -44,7 +44,7 @@ public class ItemCategoryController {
         }
     }
 
-    @DeleteMapping("itemcategory/{id}")
+    @DeleteMapping("/itemcategory/{id}")
     public ResponseEntity<?> delItemCategoryById(@PathVariable("id") String id) {
         ItemCategory target = serviceCategory.findById(id);
         if (target == null) {
@@ -55,7 +55,7 @@ public class ItemCategoryController {
         }
     }
 
-    @DeleteMapping("itemcategory/name/{name}")
+    @DeleteMapping("/itemcategory/name/{name}")
     public ResponseEntity<?> delItemCategoryByName(@PathVariable("name") String name) {
         ItemCategory target = serviceCategory.findByName(name);
         if (target == null) {
@@ -66,7 +66,7 @@ public class ItemCategoryController {
         }
     }
 
-    @PostMapping("itemcategories/")
+    @PostMapping("/itemcategories/")
     public ResponseEntity<?> createItemCategories(@RequestBody List<ItemCategory> itemCategories) {
         boolean statuList = false;
         ItemCategory target = new ItemCategory();
@@ -88,7 +88,7 @@ public class ItemCategoryController {
         }
     }
 
-    @PostMapping("itemcategory/")
+    @PostMapping("/itemcategory/")
     public ResponseEntity<?> createItemCategory(@RequestBody ItemCategory itemCategory) {
         ItemCategory target = serviceCategory.findByName(itemCategory.getNameCateory());
         if (target == null) {
@@ -100,7 +100,7 @@ public class ItemCategoryController {
         }
     }
 
-    @PutMapping("itemcategory/{id}")
+    @PutMapping("/itemcategory/{id}")
     public ResponseEntity<?> updateItemCategory(@PathVariable("id") String id, @RequestBody ItemCategory itemCategory) {
         ItemCategory targetId = serviceCategory.findById(id);
         if (targetId == null) {

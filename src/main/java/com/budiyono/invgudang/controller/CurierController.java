@@ -36,9 +36,9 @@ public class CurierController {
         }
     }
 
-    @GetMapping("/curier/name/{name}")
-    public ResponseEntity<?> getItemCategoryName(@PathVariable("name") String name) {
-        Curier target = serviceCurier.findByName(name);
+    @GetMapping("/curier/uname/{uname}")
+    public ResponseEntity<?> getItemCategoryName(@PathVariable("name") String uname) {
+        Curier target = serviceCurier.findByUName(uname);
         if (target == null) {
             return new ResponseEntity<>(new CustomErrorType("Data is not found"), HttpStatus.NOT_FOUND);
         } else {
@@ -46,9 +46,9 @@ public class CurierController {
         }
     }
 
-    @PostMapping("curier/")
+    @PostMapping("/curier/")
     public ResponseEntity<?> createItemCategory(@RequestBody Curier curier) {
-        Curier target = serviceCurier.findByName(curier.getUsernameCurier());
+        Curier target = serviceCurier.findByUName(curier.getUsernameCurier());
         if (target == null) {
             serviceCurier.saveCurier(curier);
             return new ResponseEntity<>(curier, HttpStatus.OK);
@@ -58,13 +58,13 @@ public class CurierController {
         }
     }
 
-    @PutMapping("curier/{id}")
+    @PutMapping("/curier/{id}")
     public ResponseEntity<?> updateItemCategory(@PathVariable("id") String id, @RequestBody Curier curier) {
         Curier targetId = serviceCurier.findById(id);
         if (targetId == null) {
             return new ResponseEntity<>(new CustomErrorType("Data is not found"), HttpStatus.NOT_FOUND);
         } else {
-            Curier targetName = serviceCurier.findByName(curier.getUsernameCurier());
+            Curier targetName = serviceCurier.findByUName(curier.getUsernameCurier());
             if (targetName == null) {
                 serviceCurier.updateCurier(curier);
                 return new ResponseEntity<>(curier, HttpStatus.OK);

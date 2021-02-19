@@ -48,7 +48,7 @@ public class ItemController {
         }
     }
 
-    @DeleteMapping("item/{id}")
+    @DeleteMapping("/item/{id}")
     public ResponseEntity<?> delItemById(@PathVariable("id") String id) {
         Item target = serviceItem.findById(id);
         if (target == null) {
@@ -59,7 +59,7 @@ public class ItemController {
         }
     }
 
-    @PostMapping("item/")
+    @PostMapping("/item/")
     public ResponseEntity<?> createItem(@RequestBody Item item) {
         Item target = serviceItem.findByName(item.getNamaItem());
         if (target == null) {
@@ -77,7 +77,7 @@ public class ItemController {
         }
     }
 
-    @PutMapping("item/{id}")
+    @PutMapping("/item/{id}")
     public ResponseEntity<?> updateItem(@PathVariable("id") String id, @RequestBody Item item) {
         Item targetId = serviceItem.findById(id);
         if (targetId == null) {
