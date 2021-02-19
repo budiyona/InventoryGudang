@@ -1,5 +1,6 @@
 package com.budiyono.invgudang.service;
 
+import com.budiyono.invgudang.model.Item;
 import com.budiyono.invgudang.model.ItemCategory;
 import com.budiyono.invgudang.repository.RepositoryItemCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ public class ServiceCategoryItemImpl implements ServiceCategory {
     RepositoryItemCategory repositoryItemCategory;
 
     @Override
-    public List<ItemCategory> findAllItemCategory(String initRow) {
-        return repositoryItemCategory.findAllItemCategory(initRow);
+    public List<ItemCategory> findAllItemCategory(String limit, String offset) {
+        return repositoryItemCategory.findAllItemCategory(limit, offset);
     }
 
     @Override
@@ -30,6 +31,11 @@ public class ServiceCategoryItemImpl implements ServiceCategory {
     @Override
     public void saveItemCategories(List<ItemCategory> itemCategory) {
         repositoryItemCategory.saveItemCategories(itemCategory);
+    }
+
+    @Override
+    public void saveItemCategory(ItemCategory itemCategory) {
+        repositoryItemCategory.saveItemCategory(itemCategory);
     }
 
     @Override

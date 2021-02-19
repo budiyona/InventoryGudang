@@ -5,7 +5,7 @@ import com.budiyono.invgudang.model.ItemCategory;
 import java.util.List;
 
 public interface RepositoryItemCategory {
-    List<ItemCategory> findAllItemCategory(String initRow);
+    List<ItemCategory> findAllItemCategory(String limit, String offset);
     ItemCategory findById(String id);
     ItemCategory findByName(String name);
     void saveItemCategory(ItemCategory itemCategory);

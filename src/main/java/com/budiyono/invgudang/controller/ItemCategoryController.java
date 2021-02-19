@@ -12,15 +12,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ItemCategoryController {
 
     @Autowired
     ServiceCategory serviceCategory;
 
-    @GetMapping("/itemcategories/{initRow}")
-    public ResponseEntity<List<ItemCategory>> listAllitemCategory(@PathVariable("initRow") String initRow) {
+    @GetMapping("/itemcategories")
+    public ResponseEntity<List<ItemCategory>> listAllitemCategory(@RequestParam String limit, String offset) {
 
-        return new ResponseEntity<>(serviceCategory.findAllItemCategory(initRow), HttpStatus.OK);
+        return new ResponseEntity<>(serviceCategory.findAllItemCategory(limit,offset), HttpStatus.OK);
     }
 
     @GetMapping("/itemcategory/{id}")
@@ -66,7 +67,7 @@ public class ItemCategoryController {
     }
 
     @PostMapping("itemcategories/")
-    public ResponseEntity<?> createItemCategory(@RequestBody List<ItemCategory> itemCategories) {
+    public ResponseEntity<?> createItemCategories(@RequestBody List<ItemCategory> itemCategories) {
         boolean statuList = false;
         ItemCategory target = new ItemCategory();
         for (ItemCategory itemCategory : itemCategories) {
@@ -87,8 +88,20 @@ public class ItemCategoryController {
         }
     }
 
+    @PostMapping("itemcategory/")
+    public ResponseEntity<?> createItemCategory(@RequestBody ItemCategory itemCategory) {
+        ItemCategory target = serviceCategory.findByName(itemCategory.getNameCateory());
+        if (target == null) {
+            serviceCategory.saveItemCategory(itemCategory);
+            return new ResponseEntity<>(itemCategory, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new CustomErrorType("Data with name = " +
+                    target.getNameCateory() + " Already exist"), HttpStatus.CONFLICT);
+        }
+    }
+
     @PutMapping("itemcategory/{id}")
-    public ResponseEntity<?> updateItemCategory(@PathVariable("id") String id,@RequestBody ItemCategory itemCategory) {
+    public ResponseEntity<?> updateItemCategory(@PathVariable("id") String id, @RequestBody ItemCategory itemCategory) {
         ItemCategory targetId = serviceCategory.findById(id);
         if (targetId == null) {
             return new ResponseEntity<>(new CustomErrorType("Data is not found"), HttpStatus.NOT_FOUND);

@@ -15,8 +15,8 @@ public class RepositoryItemCategoryImpl implements RepositoryItemCategory {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<ItemCategory> findAllItemCategory(String initRow) {
-        String query = "select * from item_category limit 5 offset " + initRow;
+    public List<ItemCategory> findAllItemCategory(String limit, String offset) {
+        String query = "select * from item_category limit "+limit+" offset " + offset;
         return jdbcTemplate.query(query,
                 (rs, rowNum) ->
                         new ItemCategory(
@@ -61,15 +61,15 @@ public class RepositoryItemCategoryImpl implements RepositoryItemCategory {
 
     @Override
     public void saveItemCategories(List<ItemCategory> itemCategories) {
-        for (ItemCategory item: itemCategories) {
-            String id = UUID.randomUUID().toString();
-            item.setIdCategory(id);
-            saveItemCategory(item);
+        for (ItemCategory itemCategory: itemCategories) {
+            saveItemCategory(itemCategory);
         }
     }
 
     @Override
     public void saveItemCategory(ItemCategory itemCategory) {
+        String id = UUID.randomUUID().toString();
+        itemCategory.setIdCategory(id);
         String query = "insert into item_category (idCategory, nameCategory) values (?,?)";
         jdbcTemplate.update(query, itemCategory.getIdCategory(), itemCategory.getNameCateory());
     }
