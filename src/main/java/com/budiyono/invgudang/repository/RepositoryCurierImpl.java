@@ -31,7 +31,7 @@ public class RepositoryCurierImpl implements RepositoryCurier {
     @Override
     public Curier findById(String id) {
         try {
-            String query = "select * from curier limit where idCurier = ?";
+            String query = "select * from curier where idCurier = ?";
             return jdbcTemplate.queryForObject(query,
                     (rs, rowNub) ->
                             new Curier(
@@ -49,7 +49,7 @@ public class RepositoryCurierImpl implements RepositoryCurier {
     @Override
     public Curier findByUName(String uname) {
         try {
-        String query = "select * from curier limit where usernameCurier = ?";
+        String query = "select * from curier where usernameCurier = ?";
         return jdbcTemplate.queryForObject(query,
                 (rs, rowNub) ->
                         new Curier(
