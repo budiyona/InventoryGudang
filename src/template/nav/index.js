@@ -20,8 +20,8 @@ class Nav extends Component {
                     <Link className="nav-link" to="/item">
                         Item
                     </Link>
-                    <Link className="nav-link" to="/curier">
-                        Curier
+                    <Link className="nav-link" to="/courier">
+                        Courier
                     </Link>
                     <Link className="nav-link" to="/login">
                         Logout

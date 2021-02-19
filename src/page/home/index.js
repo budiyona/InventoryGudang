@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
     constructor(props) {
@@ -23,9 +24,9 @@ class Home extends Component {
             )
     }
     render() {
-        let data = this.state.transaction.map((el,key) => 
+        let data = this.state.transaction.map((el, key) =>
             <tr key={key}>
-                <td>{key+1}</td>
+                <td>{key + 1}</td>
                 <td>{el.nameItemTrx}</td>
                 <td>{el.type}</td>
                 <td>{el.courier.nameDummyCurier}</td>
@@ -40,7 +41,9 @@ class Home extends Component {
             <>
 
                 <div className="search-bar">
-                    <input type="button" value="+" />
+                    <Link to="/courier/gate">
+                        <input type="button" value="+" />
+                    </Link>
                 </div>
                 <div className="search-bar">
                     <input type="text" name="search" className="search-text" />

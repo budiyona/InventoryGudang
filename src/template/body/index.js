@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Curier, Item, Home } from "../../page";
+import { CourierForm } from '../../component/form';
+import { Courier, Item, Home } from "../../page";
 
 class Body extends Component {
     constructor(props) {
@@ -14,14 +15,17 @@ class Body extends Component {
                     WELCOME NAMA PENGGUNA
                 </div>
                 <Switch>
-                    <Route path="/home">
+                    <Route exact path="/home">
                         <Home></Home>
                     </Route>
-                    <Route path="/item">
+                    <Route exact path="/item">
                         <Item></Item>
                     </Route>
-                    <Route path="/curier">
-                        <Curier></Curier>
+                    <Route exact path="/courier">
+                        <Courier></Courier>
+                    </Route>
+                    <Route exact path="/courier/gate">
+                        <CourierForm></CourierForm>
                     </Route>
                     <Route>
                         <div>NOT FOUND</div>

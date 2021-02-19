@@ -30,8 +30,17 @@
   background-color: #7de980;
   color: white;
 }
-
-
+.input-grup {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+.form-gate-courier {
+  display: flex;
+  flex-direction: row;
+  align-content: space-evenly;
+  margin: 20px auto;
+}
 .container {
   margin-left: 15%;
   width: 85%;

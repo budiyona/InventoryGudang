@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Curier extends Component {
+class Courier extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -74,4 +74,4 @@ class Curier extends Component {
     }
 }
 
-export default Curier;
+export default Courier;
