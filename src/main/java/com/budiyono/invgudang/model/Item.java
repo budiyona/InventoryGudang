@@ -2,26 +2,26 @@ package com.budiyono.invgudang.model;
 
 public class Item {
     private String idItem;
-    private String namaItem;
+    private String nameItem;
     private ItemCategory itemCategory;
 
     public Item(){
 
     }
 
-    public Item(String namaItem, ItemCategory itemCategory) {
-        this.namaItem = namaItem;
+    public Item(String nameItem, ItemCategory itemCategory) {
+        this.nameItem = nameItem;
         this.itemCategory = itemCategory;
     }
 
-    public Item(String idItem, String namaItem) {
+    public Item(String idItem, String nameItem) {
         this.idItem = idItem;
-        this.namaItem = namaItem;
+        this.nameItem = nameItem;
     }
 
-    public Item(String idItem, String namaItem, ItemCategory itemCategory) {
+    public Item(String idItem, String nameItem, ItemCategory itemCategory) {
         this.idItem = idItem;
-        this.namaItem = namaItem;
+        this.nameItem = nameItem;
         this.itemCategory = itemCategory;
     }
 
@@ -33,12 +33,12 @@ public class Item {
         this.idItem = idItem;
     }
 
-    public String getNamaItem() {
-        return namaItem;
+    public String getNameItem() {
+        return nameItem;
     }
 
-    public void setNamaItem(String namaItem) {
-        this.namaItem = namaItem;
+    public void setNameItem(String nameItem) {
+        this.nameItem = nameItem;
     }
 
     public ItemCategory getItemCategory() {
@@ -53,7 +53,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "idItem='" + idItem + '\'' +
-                ", namaItem='" + namaItem + '\'' +
+                ", nameItem='" + nameItem + '\'' +
                 ", itemCategory=" + itemCategory +
                 '}';
     }

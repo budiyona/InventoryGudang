@@ -24,7 +24,6 @@ public class ItemController {
 
     @GetMapping("/items")
     public ResponseEntity<List<Item>> listAllitemCategory(@RequestParam String limit, String offset) {
-        System.out.println("asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return new ResponseEntity<>(serviceItem.findAllItem(limit,offset), HttpStatus.OK);
     }
 
@@ -61,7 +60,7 @@ public class ItemController {
 
     @PostMapping("/item/")
     public ResponseEntity<?> createItem(@RequestBody Item item) {
-        Item target = serviceItem.findByName(item.getNamaItem());
+        Item target = serviceItem.findByName(item.getNameItem());
         if (target == null) {
             ItemCategory targetCat = serviceCategory.findById(item.getItemCategory().getIdCategory());
             if (targetCat == null) {
@@ -73,7 +72,7 @@ public class ItemController {
             }
         } else {
             return new ResponseEntity<>(new CustomErrorType("Data with name = " +
-                    target.getNamaItem() + " Already exist"), HttpStatus.CONFLICT);
+                    target.getNameItem() + " Already exist"), HttpStatus.CONFLICT);
         }
     }
 
@@ -83,13 +82,13 @@ public class ItemController {
         if (targetId == null) {
             return new ResponseEntity<>(new CustomErrorType("Data is not found"), HttpStatus.NOT_FOUND);
         } else {
-            Item targetName = serviceItem.findByName(item.getNamaItem());
+            Item targetName = serviceItem.findByName(item.getNameItem());
             if (targetName == null) {
                 serviceItem.updateItem(item);
                 return new ResponseEntity<>(item, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(new CustomErrorType("Data with name = " +
-                        item.getNamaItem() + " Already exist"), HttpStatus.CONFLICT);
+                        item.getNameItem() + " Already exist"), HttpStatus.CONFLICT);
             }
         }
     }

@@ -35,7 +35,7 @@ public class RepositoryItemImpl implements RepositoryItem{
         for(MapperItem map: mItems){
             Item item = new Item();
             item.setIdItem(map.getIdItem());
-            item.setNamaItem(map.getNamaItem());
+            item.setNameItem(map.getNamaItem());
             item.setItemCategory(serviceCategory.findById(map.getItemCategory()));
             Items.add(item);
         }
@@ -56,7 +56,7 @@ public class RepositoryItemImpl implements RepositoryItem{
             );
             Item item = new Item();
             item.setIdItem(Mitem.getIdItem());
-            item.setNamaItem(Mitem.getNamaItem());
+            item.setNameItem(Mitem.getNamaItem());
             item.setItemCategory(serviceCategory.findById(Mitem.getItemCategory()));
             return item;
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class RepositoryItemImpl implements RepositoryItem{
             );
             Item item = new Item();
             item.setIdItem(Mitem.getIdItem());
-            item.setNamaItem(Mitem.getNamaItem());
+            item.setNameItem(Mitem.getNamaItem());
             item.setItemCategory(serviceCategory.findById(Mitem.getItemCategory()));
             return item;
         } catch (Exception e) {
@@ -98,7 +98,7 @@ public class RepositoryItemImpl implements RepositoryItem{
         String id = UUID.randomUUID().toString();
         item.setIdItem(id);
         String query = "insert into item (idItem, nameItem, idCategory) values (?,?,?)";
-        jdbcTemplate.update(query, item.getIdItem(), item.getNamaItem(),item.getItemCategory().getIdCategory());
+        jdbcTemplate.update(query, item.getIdItem(), item.getNameItem(),item.getItemCategory().getIdCategory());
     }
 
     @Override
@@ -110,6 +110,6 @@ public class RepositoryItemImpl implements RepositoryItem{
     @Override
     public void updateItem(Item item) {
         String query = "update item set idItem=?, nameItem=?, idCategory=?";
-        jdbcTemplate.update(query, item.getIdItem(), item.getNamaItem(),item.getItemCategory().getIdCategory());
+        jdbcTemplate.update(query, item.getIdItem(), item.getNameItem(),item.getItemCategory().getIdCategory());
     }
 }

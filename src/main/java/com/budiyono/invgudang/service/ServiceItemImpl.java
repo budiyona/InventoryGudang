@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("ServiceItem")
-public class ServiceItemCategory implements ServiceItem{
+public class ServiceItemImpl implements ServiceItem{
 
     @Autowired
     RepositoryItem repositoryItem;
