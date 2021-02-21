@@ -21,18 +21,18 @@ public class ItemController {
 
     @Autowired
     ServiceCategory serviceCategory;
-    @CrossOrigin
+
     @GetMapping("/itemsnolimit")
     public ResponseEntity<List<Item>> listAllitemCategory() {
         String limit="0", offset="0";
         return new ResponseEntity<>(serviceItem.findAllItem(limit,offset), HttpStatus.OK);
     }
-    @CrossOrigin
+
     @GetMapping("/items")
     public ResponseEntity<List<Item>> listAllitemCategory(@RequestParam String limit, String offset) {
         return new ResponseEntity<>(serviceItem.findAllItem(limit,offset), HttpStatus.OK);
     }
-    @CrossOrigin
+
     @GetMapping("/item/{id}")
     public ResponseEntity<?> getItemById(@PathVariable("id") String id) {
         Item target = serviceItem.findById(id);
@@ -42,7 +42,7 @@ public class ItemController {
             return new ResponseEntity<>(target, HttpStatus.OK);
         }
     }
-    @CrossOrigin
+
     @GetMapping("/item/name/{name}")
     public ResponseEntity<?> getItemName(@PathVariable("name") String name) {
         Item target = serviceItem.findByName(name);
@@ -52,7 +52,7 @@ public class ItemController {
             return new ResponseEntity<>(target, HttpStatus.OK);
         }
     }
-    @CrossOrigin
+
     @DeleteMapping("/item/{id}")
     public ResponseEntity<?> delItemById(@PathVariable("id") String id) {
         Item target = serviceItem.findById(id);
@@ -63,7 +63,7 @@ public class ItemController {
             return new ResponseEntity<>(target, HttpStatus.OK);
         }
     }
-    @CrossOrigin(origins = "/item/")
+
     @PostMapping("/item/")
     public ResponseEntity<?> createItem(@RequestBody Item item) {
         Item target = serviceItem.findByName(item.getNameItem());
@@ -81,7 +81,7 @@ public class ItemController {
                     target.getNameItem() + " Already exist"), HttpStatus.CONFLICT);
         }
     }
-    @CrossOrigin
+
     @PutMapping("/item/{id}")
     public ResponseEntity<?> updateItem(@PathVariable("id") String id, @RequestBody Item item) {
         Item targetId = serviceItem.findById(id);
@@ -97,5 +97,28 @@ public class ItemController {
                         item.getNameItem() + " Already exist"), HttpStatus.CONFLICT);
             }
         }
+    }
+
+    @PutMapping("/item/dec")
+    public ResponseEntity<?> decItem(@RequestParam String id, Integer qty){
+        Item target = serviceItem.findById(id);
+        if(target.getStock()>qty){
+            int stokSkrng = target.getStock()-qty;
+            target.setStock(stokSkrng);
+            serviceItem.updateItem(target);
+            return new ResponseEntity<>(target, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(new CustomErrorType("Max Qty = " +
+                    target.getStock()), HttpStatus.BAD_REQUEST);
+
+        }
+    }
+    @PutMapping("/item/inc")
+    public ResponseEntity<?> incItem(@RequestParam String id, Integer qty){
+        Item target = serviceItem.findById(id);
+            int stokSkrng = target.getStock()+qty;
+            target.setStock(stokSkrng);
+            serviceItem.updateItem(target);
+            return new ResponseEntity<>(target, HttpStatus.OK);
     }
 }

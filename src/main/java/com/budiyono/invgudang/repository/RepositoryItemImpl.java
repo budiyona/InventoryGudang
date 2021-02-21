@@ -122,7 +122,12 @@ public class RepositoryItemImpl implements RepositoryItem{
 
     @Override
     public void updateItem(Item item) {
-        String query = "update item set idItem=?, nameItem=?, idCategory=?";
-        jdbcTemplate.update(query, item.getIdItem(), item.getNameItem(),item.getItemCategory().getIdCategory());
+        String query = "update item set nameItem=?, idCategory=? ,stock=?" +
+                " where idItem=?";
+        jdbcTemplate.update(query,
+                item.getNameItem(),
+                item.getItemCategory().getIdCategory(),
+                item.getStock(),
+                item.getIdItem());
     }
 }
