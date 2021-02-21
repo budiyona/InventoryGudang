@@ -29,17 +29,16 @@ class Home extends Component {
                 <td>{key + 1}</td>
                 <td>{el.nameItemTrx}</td>
                 <td>{el.type}</td>
-                <td>{el.courier.nameDummyCurier}</td>
+                <td>{el.courier.nameCourier}</td>
                 <td>{el.dateTimeCreated}</td>
                 <td>
-                    <input type="button" class="btn-update" value="Update"></input>
-                    <input type="button" class="btn-delete" value="Delete"></input>
+                    <input type="button" className="btn-update" value="Update"></input>
+                    <input type="button" className="btn-delete" value="Delete"></input>
                 </td>
             </tr>)
-
+        console.log(this.state.transaction);
         return (
             <>
-
                 <div className="search-bar">
                     <Link to="/courier/gate">
                         <input type="button" value="+" />
@@ -67,17 +66,16 @@ class Home extends Component {
                     </table>
                 </div>
 
-                <div class="pagination">
+                <div className="pagination">
                     <a href="/#">previous</a>
                     <a href="/#">1</a>
-                    <a href="/#" class="active">2</a>
+                    <a href="/#">2</a>
                     <a href="/#">3</a>
                     <a href="/#">4</a>
                     <a href="/#">6</a>
                     <a href="/#">5</a>
                     <a href="/#">next</a>
                 </div>
-
             </>
         );
     }

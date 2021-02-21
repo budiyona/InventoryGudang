@@ -1,17 +1,30 @@
 import './App.css';
 import { Body, Footer, Nav } from './template';
-import { BrowserRouter as Router } from "react-router-dom";
-
-function App() {
-  return (
-    <Router>
-    <div className="container-main">
-     <Nav></Nav>
-     <Body></Body>
-     <Footer></Footer>
-    </div>
-    </Router>
-  );
+import { Login } from './page';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  render() {
+    if (!this.props.status) {
+      return (<Login></Login>)
+    } else {
+      return (
+          <div className="container-main">
+            <Nav></Nav>
+            <Body></Body>
+            <Footer></Footer>
+          </div>
+      );
+    }
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return ({ status: state.statusLogin })
+}
+
+export default connect(mapStateToProps)(App);

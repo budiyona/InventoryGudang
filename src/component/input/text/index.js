@@ -16,6 +16,7 @@ class Text extends Component {
                 name={this.props.name}
                 type="text" className="input" 
                 onChange={this.props.onChange}
+                value={this.props.value}
                 />
             </div>
         );

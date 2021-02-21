@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 
 class Nav extends Component {
@@ -10,26 +11,34 @@ class Nav extends Component {
     render() {
         return (
             <nav className="sidebar">
-                
-                    <Link className="active">
-                        <h3>Inventory-Gudang</h3>
+
+                <Link className="active">
+                    <h3>Inventory-Gudang</h3>
+                </Link>
+                <Link className="nav-link" to="/home">
+                    Home
                     </Link>
-                    <Link className="nav-link" to="/home">
-                        Home
+                <Link className="nav-link" to="/items">
+                    Item
                     </Link>
-                    <Link className="nav-link" to="/item">
-                        Item
+                <Link className="nav-link" to="/couriers">
+                    Courier
                     </Link>
-                    <Link className="nav-link" to="/courier">
-                        Courier
-                    </Link>
+                {this.props.status &&
                     <Link className="nav-link" to="/login">
-                        Logout
+                        <span onClick={this.props.logout}>Logout</span>
                     </Link>
-                
+                }
             </nav>
         );
     }
 }
-
-export default Nav;
+const mapStateToProps = state => ({
+    status: state.statusLogin,
+})
+const mapDispatchToProps = dispatch => {
+    return {
+      logout: () => dispatch({type: "LOGOUT"}),
+    }
+  }
+export default connect(mapStateToProps,mapDispatchToProps)(Nav);
