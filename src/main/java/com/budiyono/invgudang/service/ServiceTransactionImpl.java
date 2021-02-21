@@ -14,6 +14,11 @@ public class ServiceTransactionImpl implements ServiceTransaction {
     RepositoryTransaction repositoryTransaction;
 
     @Override
+    public String getPrefix(String type) {
+        return repositoryTransaction.getPrefix(type);
+    }
+
+    @Override
     public List<Transaction> findAllTransaction(String limit, String offset) {
         return repositoryTransaction.findAllTransaction(limit, offset);
     }

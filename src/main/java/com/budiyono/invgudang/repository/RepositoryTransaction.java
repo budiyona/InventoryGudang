@@ -11,4 +11,5 @@ public interface RepositoryTransaction {
     void saveTransaction(Transaction transaction);
     void deleteTransaction(String id);
     void updateTransaction(Transaction transaction);
+    String getPrefix(String type);
 }

@@ -12,15 +12,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class ItemCategoryController {
 
     @Autowired
     ServiceCategory serviceCategory;
 
+    @GetMapping("/itemcategoriesnolimit")
+    public ResponseEntity<List<ItemCategory>> listAllitemCategory() {
+        String limit="0",offset="0";
+        return new ResponseEntity<>(serviceCategory.findAllItemCategory(limit,offset), HttpStatus.OK);
+    }
+
     @GetMapping("/itemcategories")
     public ResponseEntity<List<ItemCategory>> listAllitemCategory(@RequestParam String limit, String offset) {
-
         return new ResponseEntity<>(serviceCategory.findAllItemCategory(limit,offset), HttpStatus.OK);
     }
 
@@ -71,7 +76,7 @@ public class ItemCategoryController {
         boolean statuList = false;
         ItemCategory target = new ItemCategory();
         for (ItemCategory itemCategory : itemCategories) {
-            target = serviceCategory.findByName(itemCategory.getNameCateory());
+            target = serviceCategory.findByName(itemCategory.getNameCategory());
             if (target == null) {
                 statuList = true;
             } else {
@@ -84,19 +89,19 @@ public class ItemCategoryController {
             return new ResponseEntity<>(itemCategories, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new CustomErrorType("Data with name = " +
-                    target.getNameCateory() + " Already exist"), HttpStatus.CONFLICT);
+                    target.getNameCategory() + " Already exist"), HttpStatus.CONFLICT);
         }
     }
 
     @PostMapping("/itemcategory/")
     public ResponseEntity<?> createItemCategory(@RequestBody ItemCategory itemCategory) {
-        ItemCategory target = serviceCategory.findByName(itemCategory.getNameCateory());
+        ItemCategory target = serviceCategory.findByName(itemCategory.getNameCategory());
         if (target == null) {
             serviceCategory.saveItemCategory(itemCategory);
             return new ResponseEntity<>(itemCategory, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new CustomErrorType("Data with name = " +
-                    target.getNameCateory() + " Already exist"), HttpStatus.CONFLICT);
+                    target.getNameCategory() + " Already exist"), HttpStatus.CONFLICT);
         }
     }
 
@@ -106,13 +111,13 @@ public class ItemCategoryController {
         if (targetId == null) {
             return new ResponseEntity<>(new CustomErrorType("Data is not found"), HttpStatus.NOT_FOUND);
         } else {
-            ItemCategory targetName = serviceCategory.findByName(itemCategory.getNameCateory());
+            ItemCategory targetName = serviceCategory.findByName(itemCategory.getNameCategory());
             if (targetName == null) {
                 serviceCategory.updateItemCategory(itemCategory);
                 return new ResponseEntity<>(itemCategory, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(new CustomErrorType("Data with name = " +
-                        itemCategory.getNameCateory() + " Already exist"), HttpStatus.CONFLICT);
+                        itemCategory.getNameCategory() + " Already exist"), HttpStatus.CONFLICT);
             }
         }
     }

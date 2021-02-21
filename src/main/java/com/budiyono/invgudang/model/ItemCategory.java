@@ -2,19 +2,19 @@ package com.budiyono.invgudang.model;
 
 public class ItemCategory {
     private String idCategory;
-    private String nameCateory;
+    private String nameCategory;
 
     public ItemCategory() {
 
     }
 
-    public ItemCategory(String nameCateory) {
-        this.nameCateory = nameCateory;
+    public ItemCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 
-    public ItemCategory(String idCategory, String nameCateory) {
+    public ItemCategory(String idCategory, String nameCategory) {
         this.idCategory = idCategory;
-        this.nameCateory = nameCateory;
+        this.nameCategory = nameCategory;
     }
 
 
@@ -26,19 +26,19 @@ public class ItemCategory {
         this.idCategory = idCategory;
     }
 
-    public String getNameCateory() {
-        return nameCateory;
+    public String getNameCategory() {
+        return nameCategory;
     }
 
-    public void setNameCateory(String nameCateory) {
-        this.nameCateory = nameCateory;
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 
     @Override
     public String toString() {
         return "ItemCategory{" +
                 "idCategory='" + idCategory + '\'' +
-                ", nameCateory='" + nameCateory + '\'' +
+                ", nameCategory='" + nameCategory + '\'' +
                 '}';
     }
 }

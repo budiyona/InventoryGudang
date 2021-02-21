@@ -4,25 +4,28 @@ public class Item {
     private String idItem;
     private String nameItem;
     private ItemCategory itemCategory;
+    private int stock;
 
     public Item(){
 
     }
 
-    public Item(String nameItem, ItemCategory itemCategory) {
+    public Item(String nameItem, int stock) {
         this.nameItem = nameItem;
-        this.itemCategory = itemCategory;
+        this.stock = stock;
     }
 
-    public Item(String idItem, String nameItem) {
+    public Item(String idItem, String nameItem, int stock) {
         this.idItem = idItem;
         this.nameItem = nameItem;
+        this.stock = stock;
     }
 
-    public Item(String idItem, String nameItem, ItemCategory itemCategory) {
+    public Item(String idItem, String nameItem, ItemCategory itemCategory, int stock) {
         this.idItem = idItem;
         this.nameItem = nameItem;
         this.itemCategory = itemCategory;
+        this.stock = stock;
     }
 
     public String getIdItem() {
@@ -47,6 +50,14 @@ public class Item {
 
     public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     @Override

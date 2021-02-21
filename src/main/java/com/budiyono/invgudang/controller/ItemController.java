@@ -14,19 +14,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class ItemController {
     @Autowired
     ServiceItem serviceItem;
 
     @Autowired
     ServiceCategory serviceCategory;
-
+    @CrossOrigin
+    @GetMapping("/itemsnolimit")
+    public ResponseEntity<List<Item>> listAllitemCategory() {
+        String limit="0", offset="0";
+        return new ResponseEntity<>(serviceItem.findAllItem(limit,offset), HttpStatus.OK);
+    }
+    @CrossOrigin
     @GetMapping("/items")
     public ResponseEntity<List<Item>> listAllitemCategory(@RequestParam String limit, String offset) {
         return new ResponseEntity<>(serviceItem.findAllItem(limit,offset), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @GetMapping("/item/{id}")
     public ResponseEntity<?> getItemById(@PathVariable("id") String id) {
         Item target = serviceItem.findById(id);
@@ -36,7 +42,7 @@ public class ItemController {
             return new ResponseEntity<>(target, HttpStatus.OK);
         }
     }
-
+    @CrossOrigin
     @GetMapping("/item/name/{name}")
     public ResponseEntity<?> getItemName(@PathVariable("name") String name) {
         Item target = serviceItem.findByName(name);
@@ -46,7 +52,7 @@ public class ItemController {
             return new ResponseEntity<>(target, HttpStatus.OK);
         }
     }
-
+    @CrossOrigin
     @DeleteMapping("/item/{id}")
     public ResponseEntity<?> delItemById(@PathVariable("id") String id) {
         Item target = serviceItem.findById(id);
@@ -57,7 +63,7 @@ public class ItemController {
             return new ResponseEntity<>(target, HttpStatus.OK);
         }
     }
-
+    @CrossOrigin(origins = "/item/")
     @PostMapping("/item/")
     public ResponseEntity<?> createItem(@RequestBody Item item) {
         Item target = serviceItem.findByName(item.getNameItem());
@@ -75,7 +81,7 @@ public class ItemController {
                     target.getNameItem() + " Already exist"), HttpStatus.CONFLICT);
         }
     }
-
+    @CrossOrigin
     @PutMapping("/item/{id}")
     public ResponseEntity<?> updateItem(@PathVariable("id") String id, @RequestBody Item item) {
         Item targetId = serviceItem.findById(id);

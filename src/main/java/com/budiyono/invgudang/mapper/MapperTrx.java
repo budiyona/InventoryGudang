@@ -4,17 +4,17 @@ public class MapperTrx {
     private String idItemTrx;
     private String nameItemTrx;
     private String dateTimeCreated;
-    private String idCurier;
+    private String idCourier;
     private String type;
 
     public MapperTrx() {
     }
 
-    public MapperTrx(String idItemTrx, String nameItemTrx, String dateTimeCreated, String idCurier, String type) {
+    public MapperTrx(String idItemTrx, String nameItemTrx, String dateTimeCreated, String idCourier, String type) {
         this.idItemTrx = idItemTrx;
         this.nameItemTrx = nameItemTrx;
         this.dateTimeCreated = dateTimeCreated;
-        this.idCurier = idCurier;
+        this.idCourier = idCourier;
         this.type = type;
     }
 
@@ -42,12 +42,12 @@ public class MapperTrx {
         this.dateTimeCreated = dateTimeCreated;
     }
 
-    public String getIdCurier() {
-        return idCurier;
+    public String getIdCourier() {
+        return idCourier;
     }
 
-    public void setIdCurier(String idCurier) {
-        this.idCurier = idCurier;
+    public void setIdCourier(String idCourier) {
+        this.idCourier = idCourier;
     }
 
     public String getType() {
@@ -64,7 +64,7 @@ public class MapperTrx {
                 "idItemTrx='" + idItemTrx + '\'' +
                 ", nameItemTrx='" + nameItemTrx + '\'' +
                 ", dateTimeCreated='" + dateTimeCreated + '\'' +
-                ", idCurier='" + idCurier + '\'' +
+                ", idCourier='" + idCourier + '\'' +
                 ", type='" + type + '\'' +
                 '}';
     }

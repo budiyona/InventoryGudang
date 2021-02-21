@@ -4,11 +4,13 @@ public class MapperItem {
     private String idItem;
     private String namaItem;
     private String itemCategory;
+    private int stock;
 
-    public MapperItem(String idItem, String namaItem, String itemCategory) {
+    public MapperItem(String idItem, String namaItem, String itemCategory, int stock) {
         this.idItem = idItem;
         this.namaItem = namaItem;
         this.itemCategory = itemCategory;
+        this.stock=stock;
     }
 
     public String getIdItem() {
@@ -33,6 +35,14 @@ public class MapperItem {
 
     public void setItemCategory(String itemCategory) {
         this.itemCategory = itemCategory;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }
 

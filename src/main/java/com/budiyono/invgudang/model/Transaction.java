@@ -6,9 +6,9 @@ public class Transaction {
     private String idItemTrx;
     private String nameItemTrx;
     private String dateTimeCreated;
-    private Curier courier;
+    private Courier courier;
     private String type;
-    private List<Item> items;
+    private List<ItemInOut> items;
 
     public Transaction() {
     }
@@ -26,7 +26,7 @@ public class Transaction {
         this.type = type;
     }
 
-    public Transaction(String idItemTrx, String nameItemTrx, String dateTimeCreated, Curier courier, String type, List<Item> items) {
+    public Transaction(String idItemTrx, String nameItemTrx, String dateTimeCreated, Courier courier, String type, List<ItemInOut> items) {
         this.idItemTrx = idItemTrx;
         this.nameItemTrx = nameItemTrx;
         this.dateTimeCreated = dateTimeCreated;
@@ -59,11 +59,11 @@ public class Transaction {
         this.dateTimeCreated = dateTimeCreated;
     }
 
-    public Curier getCourier() {
+    public Courier getCourier() {
         return courier;
     }
 
-    public void setCourier(Curier courier) {
+    public void setCourier(Courier courier) {
         this.courier = courier;
     }
 
@@ -75,11 +75,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public List<Item> getItems() {
+    public List<ItemInOut> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<ItemInOut> items) {
         this.items = items;
     }
 

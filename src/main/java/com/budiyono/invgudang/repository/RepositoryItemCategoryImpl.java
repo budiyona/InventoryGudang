@@ -16,7 +16,12 @@ public class RepositoryItemCategoryImpl implements RepositoryItemCategory {
 
     @Override
     public List<ItemCategory> findAllItemCategory(String limit, String offset) {
-        String query = "select * from item_category limit "+limit+" offset " + offset;
+        String query="";
+        if(limit.equalsIgnoreCase("0")&&offset.equalsIgnoreCase("0")){
+            query = "select * from item_category";
+        }else {
+            query = "select * from item_category limit " + limit + " offset " + offset;
+        }
         return jdbcTemplate.query(query,
                 (rs, rowNum) ->
                         new ItemCategory(
@@ -25,6 +30,7 @@ public class RepositoryItemCategoryImpl implements RepositoryItemCategory {
                         )
 
         );
+
     }
 
     @Override
@@ -71,7 +77,7 @@ public class RepositoryItemCategoryImpl implements RepositoryItemCategory {
         String id = UUID.randomUUID().toString();
         itemCategory.setIdCategory(id);
         String query = "insert into item_category (idCategory, nameCategory) values (?,?)";
-        jdbcTemplate.update(query, itemCategory.getIdCategory(), itemCategory.getNameCateory());
+        jdbcTemplate.update(query, itemCategory.getIdCategory(), itemCategory.getNameCategory());
     }
 
     @Override
@@ -89,6 +95,6 @@ public class RepositoryItemCategoryImpl implements RepositoryItemCategory {
     @Override
     public void updateItemCategory(ItemCategory itemCategory) {
         String query = "update item_category set nameCategory=? where idCategory=?";
-        jdbcTemplate.update(query,itemCategory.getNameCateory(),itemCategory.getIdCategory());
+        jdbcTemplate.update(query,itemCategory.getNameCategory(),itemCategory.getIdCategory());
     }
 }
