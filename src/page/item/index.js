@@ -7,11 +7,16 @@ class item extends Component {
         this.state = {
             item: [],
             loading:true,
-            cat: {}
+            cat: {},
+            offset: 0
         }
     }
     componentDidMount() {
-        fetch('http://localhost:8080/api/items?limit=15&&offset=0')
+        this.getData()
+    }
+
+    getData=()=>{
+        fetch('http://localhost:8080/api/items?limit=15&&offset='+this.state.offset)
             .then(response => response.json())
             .then(json => this.setState({ item: json, loading: false , cat: json.itemCategory}))
             .catch((e) => {
@@ -24,10 +29,14 @@ class item extends Component {
                 })
             )
     }
+
+    next=()=>{
+        this.setState({offset: this.state.offset+15})
+        this.getData()
+    }
+
    
     render() {
-        // console.log(this.state.item);
-        console.log(this.state.cat);
         let data = this.state.item.map((el,key) => (
             <tr key={key}>
                 <td>{key+1}</td>
@@ -68,15 +77,9 @@ class item extends Component {
                     </table>
                 </div>
 
-                <div class="pagination">
-                    <a href="/#">previous</a>
-                    <a href="/#">1</a>
-                    <a href="/#">2</a>
-                    <a href="/#">3</a>
-                    <a href="/#">4</a>
-                    <a href="/#">5</a>
-                    <a href="/#">6</a>
-                    <a href="/#">next</a>
+                <div className="pagination">
+                    <button className="ban-button">previous</button>
+                    <button className="ban-button" onClick={this.next}>next</button>
                 </div>
 
             </>

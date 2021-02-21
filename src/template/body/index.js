@@ -15,9 +15,13 @@ class Body extends Component {
                     WELCOME ADMIN
                 </div>
                 <Switch>
-                    <Route path="/home">
-                        <Home></Home>
-                    </Route>
+                    <Route path="/home" component={
+                        ()=>{
+                            let history = useHistory()
+                            return <Home history={history}></Home>
+                        }
+                    }          
+                    />
                     <Route exact path="/items">
                         <Item></Item>
                     </Route>

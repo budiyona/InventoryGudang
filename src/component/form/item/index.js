@@ -42,9 +42,21 @@ class ItemForm extends Component {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    console.log("error");
+                    return response.json().then(text => {
+                        throw new Error(`${text.errorMessage}`)
+                    })
+                }
+                console.log(response);
+                response.json()
+            })
             .then((json) => console.log(json))
             .then(this.props.history.push("/items"))
+            .catch(e => {
+                alert(e)
+            })
     }
     
     render() {

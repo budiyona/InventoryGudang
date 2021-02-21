@@ -23,6 +23,29 @@ class Home extends Component {
                 })
             )
     }
+
+    getData=()=>{
+        fetch('http://localhost:8080/api/transactions?limit=15&offset=0')
+            .then(response => response.json())
+            .then(json => this.setState({ transaction: json, loading: false }))
+            .catch((e) => {
+                console.log(e);
+                alert("failed to fetch data")
+            })
+            .finally(
+                this.setState({
+                    loading: true
+                })
+            )
+    }
+
+    delTrx = (id) => {
+        fetch('http://localhost:8080/api/transaction/'+id, {
+            method: 'DELETE',
+          }).then(this.getData())
+          .then(this.props.history.push("/home"))
+    }
+
     render() {
         let data = this.state.transaction.map((el, key) =>
             <tr key={key}>
@@ -33,7 +56,7 @@ class Home extends Component {
                 <td>{el.dateTimeCreated}</td>
                 <td>
                     <input type="button" className="btn-update" value="Update"></input>
-                    <input type="button" className="btn-delete" value="Delete"></input>
+                    <input type="button" className="btn-delete" value="Delete" onClick={()=>{this.delTrx(el.idItemTrx)}}></input>
                 </td>
             </tr>)
         console.log(this.state.transaction);
@@ -65,16 +88,9 @@ class Home extends Component {
                         </tbody>
                     </table>
                 </div>
-
                 <div className="pagination">
-                    <a href="/#">previous</a>
-                    <a href="/#">1</a>
-                    <a href="/#">2</a>
-                    <a href="/#">3</a>
-                    <a href="/#">4</a>
-                    <a href="/#">6</a>
-                    <a href="/#">5</a>
-                    <a href="/#">next</a>
+                    <button className="ban-button">previous</button>
+                    <button className="ban-button">next</button>
                 </div>
             </>
         );

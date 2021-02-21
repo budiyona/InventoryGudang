@@ -10,7 +10,10 @@ class CourierTrxForm extends Component {
             items: [],
             courier: [],
             idCourier: "",
-            type: ""
+            type: "",
+            curStok: 0,
+            masuk: 0,
+            keluar: 0
         }
     }
     setValue = el => {
@@ -108,7 +111,7 @@ class CourierTrxForm extends Component {
     saveData = () => {
         let litem = []
         this.state.inputList.forEach(el => {
-            let itembaru = this.state.items.find(e=>e.idItem===el.idItem)
+            let itembaru = this.state.items.find(e => e.idItem === el.idItem)
 
             litem.push({
                 idItem: itembaru.idItem,
@@ -130,9 +133,48 @@ class CourierTrxForm extends Component {
             body: JSON.stringify(trx),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
-            },
-        }).then(this.props.history.push("/home"))
+            }
+        }).then((response) => {
+            if (!response.ok) {
+                console.log("error");
+                return response.json().then(text => {
+                    throw new Error(`${text.errorMessage}`)
+                })
+            }
+        }).then(()=> {
+            if(trx.type==='IN'){
+                litem.forEach(el=> this.masuk(el.qty,el.idItem))
+            }else{
+                litem.forEach(el=> this.keluar(el.qty,el.idItem))
+            }
+        })
+            .then(this.props.history.push("/home"))
+            .catch(e => {
+                alert(e)
+            })
 
+
+    }
+    masuk = (qty, id) => {
+        fetch('http://localhost:8080/api/item/inc?id=' + id + "&qty=" + qty, {
+            method: 'PUT'
+        })
+    }
+    keluar = (qty, id) => {
+        fetch('http://localhost:8080/api/item/dec?id=' + id + "&qty=" + qty, {
+            method: 'PUT'
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    console.log("error");
+                    return response.json().then(text => {
+                        throw new Error(`${text.errorMessage}`)
+                    })
+                }
+            })
+            .catch(e => {
+                alert(e)
+            })
     }
     render() {
 

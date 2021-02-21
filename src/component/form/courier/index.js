@@ -16,9 +16,9 @@ class CourierForm extends Component {
         })
     }
     addCourier = () => {
-        const {nameCourier,usernameCourier,idVehicle}= this.state
+        const { nameCourier, usernameCourier, idVehicle } = this.state
         let courier = {
-            nameCourier,usernameCourier,idVehicle
+            nameCourier, usernameCourier, idVehicle
         }
         fetch('http://localhost:8080/api/courier/', {
             method: 'POST',
@@ -28,11 +28,19 @@ class CourierForm extends Component {
             },
         })
             .then((response) => {
-                if(response.status!==200) this.setState({err: response.json()})
+                if (!response.ok) {
+                    console.log("error");
+                    return response.json().then(text => {
+                        throw new Error(`${text.errorMessage}`)
+                    })
+                }
             })
             .then(
                 this.props.history.push("/couriers")
-                )
+            )
+            .catch(e => {
+                alert(e)
+            })
 
     }
     render() {
@@ -66,7 +74,7 @@ class CourierForm extends Component {
                             onChange={this.setValue}
                         />
                     </div>
-                    
+
                     <div className="input-grup">
                         <label className="form-label "> -</label>
                         <input type="button" value="add" onClick={this.addCourier} />
