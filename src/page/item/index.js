@@ -35,13 +35,17 @@ class item extends Component {
         this.getData()
     }
 
-   
+    prev=()=>{
+        this.setState({offset: this.state.offset-15})
+        this.getData()
+    }
     render() {
         let data = this.state.item.map((el,key) => (
             <tr key={key}>
                 <td>{key+1}</td>
                 <td>{el.nameItem}</td>
                 <td>{el.stock}</td>
+                <td>{el.itemCategory.nameCategory}</td>
                 <td>
                     <input type="button" className="btn-update" value="Update"></input>
                     <input type="button" className="btn-delete" value="Delete"></input>
@@ -68,6 +72,7 @@ class item extends Component {
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Stok</th>
+                                <th>Category</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

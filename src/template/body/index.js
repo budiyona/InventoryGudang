@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { CourierForm, CourierTrxForm, ItemForm } from '../../component/form';
 import { Courier, Item, Home } from "../../page";
 
@@ -14,13 +14,17 @@ class Body extends Component {
                 <div className="title-body">
                     WELCOME ADMIN
                 </div>
+
                 <Switch>
+                    <Route exact path="/">
+                        <Redirect to="/home" />
+                    </Route>
                     <Route path="/home" component={
-                        ()=>{
+                        () => {
                             let history = useHistory()
                             return <Home history={history}></Home>
                         }
-                    }          
+                    }
                     />
                     <Route exact path="/items">
                         <Item></Item>
@@ -29,11 +33,11 @@ class Body extends Component {
                         <Courier></Courier>
                     </Route>
                     <Route exact path="/courier/gate" component={
-                        ()=>{
+                        () => {
                             let history = useHistory()
                             return <CourierTrxForm history={history}></CourierTrxForm>
                         }
-                    }          
+                    }
                     />
                     <Route exact path="/courier" component={
                         () => {
