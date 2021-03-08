@@ -42,7 +42,7 @@ public class CourierController {
     }
 
     @GetMapping("/courier/uname/{uname}")
-    public ResponseEntity<?> getItemCourierName(@PathVariable("name") String uname) {
+    public ResponseEntity<?> getItemCourierName(@PathVariable("uname") String uname) {
         Courier target = serviceCourier.findByUName(uname);
         if (target == null) {
             return new ResponseEntity<>(new CustomErrorType("Data is not found"), HttpStatus.NOT_FOUND);

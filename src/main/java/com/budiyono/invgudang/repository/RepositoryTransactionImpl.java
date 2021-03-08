@@ -97,7 +97,7 @@ public class RepositoryTransactionImpl implements RepositoryTransaction {
             String queryItem = "select i.idItem, i.nameItem, i.idCategory, d.qty " +
                     "from detail_transaction d " +
                     "join item i ON i.idItem =d.idItem " +
-                    "where idTransaction =?";
+                    "where idItemTrx =?";
 
             List<ItemInOut> items = jdbcTemplate.query(queryItem,
                     (rs, rowNum) -> new ItemInOut(
@@ -138,7 +138,7 @@ public class RepositoryTransactionImpl implements RepositoryTransaction {
             String queryItem = "select i.idItem, i.nameItem, i.idCategory, d.qty " +
                     "from detail_transaction d " +
                     "join item i ON i.idItem =d.idItem " +
-                    "where idTransaction =?";
+                    "where idItemTrx =?";
 
             List<ItemInOut> items = jdbcTemplate.query(queryItem,
                     (rs, rowNum) -> new ItemInOut(
@@ -230,9 +230,9 @@ public class RepositoryTransactionImpl implements RepositoryTransaction {
 
     @Override
     public String getPrefix(String type) {
-        String query = "select count(*) from transaction where dateTimeCreated=curdate() AND type=?";
+        String query = "select count(*) from transaction where date(dateTimeCreated)=curdate() and type=?";
         int count = jdbcTemplate.queryForObject(query, Integer.class, type);
-        String prefix = String.format("%03d", count+1);
+        String prefix = String.format("%02d", count+1);
         return prefix;
     }
 }
